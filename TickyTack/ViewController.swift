@@ -125,11 +125,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Core Data
 
     private func loadTicksFromCoreData() {
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "Tick")
+        
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoredTick")
+        
         do {
+            
             let objects = try context.fetch(fetchRequest)
             let docs = documentsDirectory()
             var items: [(Tick, NSManagedObject, Date)] = []
+            
             for obj in objects {
                 guard let urlString = obj.value(forKey: "videoURLString") as? String else { continue }
                 let url: URL?
@@ -143,34 +147,52 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     items.append((Tick(videoURL: url), obj, date))
                 }
             }
+            
             let sorted = items.sorted { $0.2 > $1.2 }
+            
             self.ticks = sorted.map { $0.0 }
             self.tickObjects = sorted.map { $0.1 }
+            
             self.tableView.reloadData()
+            
         } catch {
+            
             print("Failed to fetch ticks from Core Data: \(error)")
         }
     }
 
     @discardableResult
     private func saveTickToCoreData(_ tick: Tick) -> NSManagedObject? {
-        guard let entity = NSEntityDescription.entity(forEntityName: "Tick", in: context) else {
+        
+        guard let entity = NSEntityDescription.entity(forEntityName: "StoredTick", in: context) else {
             print("Core Data entity 'Tick' not found in model.")
             return nil
         }
+        
         let obj = NSManagedObject(entity: entity, insertInto: context)
         var storedString: String? = nil
+        
         if let url = tick.videoURL, let rel = relativePathForDocuments(url: url) {
+            
             storedString = rel
+            
         } else {
+            
             storedString = tick.videoURL?.absoluteString
         }
+        
         obj.setValue(storedString, forKey: "videoURLString")
+        
         do {
+            
             try context.save()
+            
             return obj
+            
         } catch {
+            
             print("Failed to save tick to Core Data: \(error)")
+            
             return nil
         }
     }
@@ -350,13 +372,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             guard let self = self else { completion(false); return }
             self.deleteTick(at: indexPath)
             completion(true)
         }
+        deleteAction.image = UIImage(systemName: "trash.fill")
+        
         let config = UISwipeActionsConfiguration(actions: [deleteAction])
         config.performsFirstActionWithFullSwipe = true
+        
         return config
     }
     
@@ -387,5 +413,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.cameraButtonView.transform = .identity
         }
     }
+    
+    @IBAction func didTapMore(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    @IBAction func didTapSettings(_ sender: UIBarButtonItem) {
+        
+    }
 }
-

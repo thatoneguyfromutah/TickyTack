@@ -43,27 +43,18 @@
                                                                 </userDefinedRuntimeAttribute>
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzI-2t-NKX">
+                                                        <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzI-2t-NKX">
                                                             <rect key="frame" x="112.66666666666666" y="112.66666666666669" width="128" height="128"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sxr-yT-2LB">
                                                                     <rect key="frame" x="20" y="22.333333333333321" width="88" height="83.666666666666686"/>
                                                                 </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5r-hR-LPS">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
-                                                                    <state key="normal" title="Button"/>
-                                                                    <buttonConfiguration key="configuration" style="plain"/>
-                                                                </button>
                                                             </subviews>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="sxr-yT-2LB" secondAttribute="bottom" constant="20" id="DA7-R0-yQn"/>
-                                                                <constraint firstItem="l5r-hR-LPS" firstAttribute="top" secondItem="yzI-2t-NKX" secondAttribute="top" id="DmO-DM-Xlc"/>
                                                                 <constraint firstAttribute="trailing" secondItem="sxr-yT-2LB" secondAttribute="trailing" constant="20" id="DuG-bP-HoU"/>
-                                                                <constraint firstAttribute="bottom" secondItem="l5r-hR-LPS" secondAttribute="bottom" id="Ekq-dl-unb"/>
                                                                 <constraint firstAttribute="width" constant="128" id="JZR-pM-uuc"/>
-                                                                <constraint firstItem="l5r-hR-LPS" firstAttribute="leading" secondItem="yzI-2t-NKX" secondAttribute="leading" id="LNa-OL-gTd"/>
-                                                                <constraint firstAttribute="trailing" secondItem="l5r-hR-LPS" secondAttribute="trailing" id="SeN-yf-nV9"/>
                                                                 <constraint firstAttribute="height" constant="128" id="eO7-8s-xYS"/>
                                                                 <constraint firstItem="sxr-yT-2LB" firstAttribute="top" secondItem="yzI-2t-NKX" secondAttribute="top" constant="20" id="h1W-r6-DrT"/>
                                                                 <constraint firstItem="sxr-yT-2LB" firstAttribute="leading" secondItem="yzI-2t-NKX" secondAttribute="leading" constant="20" id="x4a-h9-H3c"/>
@@ -130,12 +121,18 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="70b-dP-EMa"/>
                                     <barButtonItem title="Item" image="ellipsis.circle.fill" catalog="system" id="xud-nA-Sj0">
                                         <color key="tintColor" systemColor="tintColor"/>
+                                        <connections>
+                                            <action selector="didTapMore:" destination="cl1-6x-IZ7" id="o3Q-hD-JXy"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="yc8-Xz-Ocf"/>
                                     <barButtonItem width="148" style="plain" systemItem="fixedSpace" id="mqm-FI-V3n"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="wvL-qp-7eh"/>
                                     <barButtonItem title="Item" image="gearshape.fill" catalog="system" id="bc9-2R-R9H">
                                         <color key="tintColor" systemColor="tintColor"/>
+                                        <connections>
+                                            <action selector="didTapSettings:" destination="cl1-6x-IZ7" id="mcy-LP-Fn7"/>
+                                        </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="GbW-Bi-Wno"/>
                                 </items>
@@ -183,7 +180,7 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="jNZ-Do-6EK"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="Tj2-MD-SLf" firstAttribute="top" secondItem="gs4-ak-ZOi" secondAttribute="bottom" id="2vn-Wg-OFE"/>
                             <constraint firstItem="dtQ-bA-och" firstAttribute="top" secondItem="0oz-hD-g4b" secondAttribute="top" id="6bO-SE-UBQ"/>
@@ -213,22 +210,26 @@
             <point key="canvasLocation" x="211" y="11"/>
         </scene>
     </scenes>
+    <color key="tintColor" systemColor="systemRedColor"/>
     <resources>
         <image name="ellipsis.circle.fill" catalog="system" width="128" height="123"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>
         <image name="video.fill" catalog="system" width="128" height="81"/>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
