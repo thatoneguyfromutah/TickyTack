@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBOutlet weak var cameraButtonView: UIView!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var toolbarBackgroundView: UIView!
     
     // MARK: - View Lifecycle
     
@@ -34,7 +35,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         
         // Add shadows
-        addShadowToView(cameraButtonView)
+        addShadowToViews([cameraButtonView, toolbarBackgroundView])
         
         // Core data
         loadTicksFromCoreData()
@@ -319,6 +320,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // MARK: - Table View Delegate & Data Source
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        let emptyLabel = UILabel()
+        emptyLabel.textColor = .systemGray
+        emptyLabel.font = UIFont.systemFont(ofSize: 28)
+        emptyLabel.textAlignment = .center
+        emptyLabel.text = ticks.isEmpty ? "No Ticks" : nil
+        
+        tableView.backgroundView = ticks.isEmpty ? emptyLabel : nil
         
         return ticks.count
     }

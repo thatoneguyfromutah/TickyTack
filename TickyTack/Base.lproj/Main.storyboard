@@ -18,21 +18,21 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-bA-och">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="735.66666666666663"/>
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="736"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="383" id="Wv2-Jf-xQL" customClass="TableViewCell" customModule="TickyTack" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="383"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="373" id="Wv2-Jf-xQL" customClass="TableViewCell" customModule="TickyTack" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="373"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wv2-Jf-xQL" id="xbJ-Nr-jFH">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="383"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="373"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jPQ-WE-k2G">
-                                                    <rect key="frame" x="20" y="15" width="353" height="353"/>
+                                                    <rect key="frame" x="20" y="15" width="353" height="343"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="i2r-Gc-cfm">
-                                                            <rect key="frame" x="10" y="10" width="333" height="333"/>
+                                                            <rect key="frame" x="10" y="10" width="333" height="323"/>
                                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="i2r-Gc-cfm" secondAttribute="height" multiplier="1:1" id="SQh-VJ-xwe"/>
@@ -44,13 +44,13 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </imageView>
                                                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yzI-2t-NKX">
-                                                            <rect key="frame" x="112.66666666666666" y="112.66666666666669" width="128" height="128"/>
+                                                            <rect key="frame" x="112.66666666666666" y="107.66666666666669" width="128" height="128"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="play.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sxr-yT-2LB">
                                                                     <rect key="frame" x="20" y="22.333333333333321" width="88" height="83.666666666666686"/>
                                                                 </imageView>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                            <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="bottom" secondItem="sxr-yT-2LB" secondAttribute="bottom" constant="20" id="DA7-R0-yQn"/>
                                                                 <constraint firstAttribute="trailing" secondItem="sxr-yT-2LB" secondAttribute="trailing" constant="20" id="DuG-bP-HoU"/>
@@ -66,7 +66,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </view>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstAttribute="bottom" secondItem="i2r-Gc-cfm" secondAttribute="bottom" constant="10" id="1bx-wd-Py2"/>
                                                         <constraint firstItem="i2r-Gc-cfm" firstAttribute="top" secondItem="jPQ-WE-k2G" secondAttribute="top" constant="10" id="8u0-eE-zIj"/>
@@ -104,19 +104,12 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tj2-MD-SLf">
-                                <rect key="frame" x="0.0" y="784" width="393" height="68"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AyI-fE-oLg">
-                                <rect key="frame" x="0.0" y="735.66666666666663" width="393" height="0.33333333333337123"/>
-                                <color key="backgroundColor" systemColor="systemGrayColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="0.33000000000000002" id="X72-Vq-sIk"/>
-                                </constraints>
+                                <rect key="frame" x="0.0" y="736" width="393" height="116"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gs4-ak-ZOi">
                                 <rect key="frame" x="0.0" y="736" width="393" height="48"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" systemColor="tertiarySystemBackgroundColor"/>
                                 <items>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="70b-dP-EMa"/>
                                     <barButtonItem title="Item" image="ellipsis.circle.fill" catalog="system" id="xud-nA-Sj0">
@@ -141,9 +134,9 @@
                                 <rect key="frame" x="122.66666666666669" y="686" width="148" height="148"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="57p-w6-ZAd">
-                                        <rect key="frame" x="19.999999999999986" y="19.333333333333336" width="108" height="109.33333333333331"/>
-                                        <color key="tintColor" systemColor="systemBackgroundColor"/>
-                                        <imageReference key="image" image="video.fill" catalog="system" symbolScale="large"/>
+                                        <rect key="frame" x="19.999999999999986" y="20" width="108" height="108"/>
+                                        <color key="tintColor" systemColor="secondarySystemBackgroundColor"/>
+                                        <imageReference key="image" image="TickyTackLogo" symbolScale="large"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mRE-mo-got">
                                         <rect key="frame" x="0.0" y="0.0" width="148" height="148"/>
@@ -182,51 +175,49 @@
                         <viewLayoutGuide key="safeArea" id="jNZ-Do-6EK"/>
                         <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Tj2-MD-SLf" firstAttribute="top" secondItem="gs4-ak-ZOi" secondAttribute="bottom" id="2vn-Wg-OFE"/>
+                            <constraint firstAttribute="bottom" secondItem="Tj2-MD-SLf" secondAttribute="bottom" id="0VW-fl-IFO"/>
                             <constraint firstItem="dtQ-bA-och" firstAttribute="top" secondItem="0oz-hD-g4b" secondAttribute="top" id="6bO-SE-UBQ"/>
                             <constraint firstItem="gs4-ak-ZOi" firstAttribute="bottom" secondItem="jNZ-Do-6EK" secondAttribute="bottom" id="6pG-aX-mei"/>
                             <constraint firstItem="dtQ-bA-och" firstAttribute="trailing" secondItem="jNZ-Do-6EK" secondAttribute="trailing" id="BPg-X9-Fn6"/>
                             <constraint firstItem="gs4-ak-ZOi" firstAttribute="leading" secondItem="jNZ-Do-6EK" secondAttribute="leading" id="E3y-T4-srw"/>
-                            <constraint firstItem="AyI-fE-oLg" firstAttribute="leading" secondItem="0oz-hD-g4b" secondAttribute="leading" id="UXK-Nq-aM2"/>
-                            <constraint firstItem="AyI-fE-oLg" firstAttribute="top" secondItem="dtQ-bA-och" secondAttribute="bottom" id="VQD-If-1xm"/>
+                            <constraint firstItem="gs4-ak-ZOi" firstAttribute="top" secondItem="dtQ-bA-och" secondAttribute="bottom" id="H9y-R6-pcT"/>
                             <constraint firstItem="dtQ-bA-och" firstAttribute="leading" secondItem="jNZ-Do-6EK" secondAttribute="leading" id="bOI-LP-vjl"/>
-                            <constraint firstAttribute="trailing" secondItem="AyI-fE-oLg" secondAttribute="trailing" id="i6Y-G5-dfm"/>
                             <constraint firstItem="8YN-t2-Dbx" firstAttribute="centerY" secondItem="gs4-ak-ZOi" secondAttribute="centerY" id="k7E-Sa-nNp"/>
                             <constraint firstItem="8YN-t2-Dbx" firstAttribute="centerX" secondItem="0oz-hD-g4b" secondAttribute="centerX" id="owN-GZ-4ps"/>
-                            <constraint firstItem="gs4-ak-ZOi" firstAttribute="top" secondItem="AyI-fE-oLg" secondAttribute="bottom" id="pGF-bI-kdb"/>
-                            <constraint firstAttribute="bottom" secondItem="Tj2-MD-SLf" secondAttribute="bottom" id="qss-TS-yeK"/>
                             <constraint firstAttribute="trailing" secondItem="Tj2-MD-SLf" secondAttribute="trailing" id="rhm-mc-Oex"/>
                             <constraint firstItem="gs4-ak-ZOi" firstAttribute="trailing" secondItem="jNZ-Do-6EK" secondAttribute="trailing" id="uII-Ln-bXz"/>
+                            <constraint firstItem="Tj2-MD-SLf" firstAttribute="top" secondItem="dtQ-bA-och" secondAttribute="bottom" id="yTY-CW-afo"/>
                             <constraint firstItem="Tj2-MD-SLf" firstAttribute="leading" secondItem="0oz-hD-g4b" secondAttribute="leading" id="yXg-Ix-v11"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="cameraButtonView" destination="8YN-t2-Dbx" id="U5F-1g-9ij"/>
                         <outlet property="tableView" destination="dtQ-bA-och" id="WDO-k0-AWf"/>
+                        <outlet property="toolbarBackgroundView" destination="Tj2-MD-SLf" id="jLm-Od-Cue"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ddr-KN-O0e" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="211" y="11"/>
+            <point key="canvasLocation" x="209.92366412213741" y="10.563380281690142"/>
         </scene>
     </scenes>
     <color key="tintColor" systemColor="systemRedColor"/>
     <resources>
+        <image name="TickyTackLogo" width="170.66667175292969" height="170.66667175292969"/>
         <image name="ellipsis.circle.fill" catalog="system" width="128" height="123"/>
         <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="play.fill" catalog="system" width="120" height="128"/>
-        <image name="video.fill" catalog="system" width="128" height="81"/>
         <systemColor name="secondarySystemBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.2196078431372549" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="tertiarySystemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
             <color red="0.0" green="0.53333333333333333" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
