@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  TickyTack
 //
-//  Created by Chase Angelo Giles on 9/27/25.
+//  Created by Chase Angelo Giles, with AI assistance, on 9/27/25.
 //
 
 import UIKit
@@ -387,7 +387,26 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
         
-        let config = UISwipeActionsConfiguration(actions: [deleteAction])
+        let shareAction = UIContextualAction(style: .normal, title: "Share") { [weak self] _, _, completion in
+            guard let self = self else { completion(false); return }
+            guard let url = self.tacks[indexPath.row].videoURL else { completion(false); return }
+            let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+            if let popover = activityVC.popoverPresentationController {
+                if let cell = tableView.cellForRow(at: indexPath) {
+                    popover.sourceView = cell
+                    popover.sourceRect = cell.bounds
+                } else {
+                    popover.sourceView = self.view
+                    popover.sourceRect = self.view.bounds
+                }
+            }
+            self.present(activityVC, animated: true)
+            completion(true)
+        }
+        shareAction.image = UIImage(systemName: "square.and.arrow.up")
+        shareAction.backgroundColor = .systemBlue
+        
+        let config = UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
         config.performsFirstActionWithFullSwipe = true
         
         return config
@@ -535,6 +554,42 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         alertController.addAction(followDeveloperAction)
         
+        let privacyPolicyAction = UIAlertAction(title: "App Privacy Policy", style: .default) { _ in
+            
+            if let url = URL(string: "https://www.iubenda.com/privacy-policy/78992277"), UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the app privacy policy.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(privacyPolicyAction)
+        
+        let moreAppsAction = UIAlertAction(title: "More Apps From Dev", style: .default) { _ in
+            
+            if let url = URL(string: "https://apps.apple.com/developer/chase-giles/id687549414"), UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the developer's apps page.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(moreAppsAction)
+        
         present(alertController, animated: true)
     }
     
@@ -546,3 +601,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
 }
+
