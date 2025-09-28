@@ -1,5 +1,5 @@
 //
-//  Tick.swift
+//  Tack.swift
 //  TickyTack
 //
 //  Created by Chase Angelo Giles on 9/18/25.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Tick: NSObject {
+class Tack: NSObject {
     
     // MARK: - Properties
     

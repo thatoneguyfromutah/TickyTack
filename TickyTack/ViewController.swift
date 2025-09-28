@@ -15,8 +15,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Properties
     
-    var ticks: [Tick] = []
-    var tickObjects: [NSManagedObject] = []
+    var tacks: [Tack] = []
+    var tackObjects: [NSManagedObject] = []
     // Core Data context
     lazy var context: NSManagedObjectContext = {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -38,12 +38,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         addShadowToViews([cameraButtonView, toolbarBackgroundView])
         
         // Core data
-        loadTicksFromCoreData()
+        loadTacksFromCoreData()
         
         // Permissions
-        requestCameraAndMicPermissions(completion: { _ in
-            
-        })
+        requestCameraAndMicPermissions(completion: { _ in })
     }
     
     // MARK: - Permissions
@@ -107,11 +105,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             } catch {
                 print("Failed to save video to Documents: \(error). Will use original URL.")
             }
-            let tick = Tick(videoURL: finalURL)
-            if let obj = saveTickToCoreData(tick) {
-                tickObjects.insert(obj, at: 0)
+            let tack = Tack(videoURL: finalURL)
+            if let obj = saveTackToCoreData(tack) {
+                tackObjects.insert(obj, at: 0)
             }
-            ticks.insert(tick, at: 0)
+            tacks.insert(tack, at: 0)
             tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
         }
         
@@ -125,15 +123,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // MARK: - Core Data
 
-    private func loadTicksFromCoreData() {
+    private func loadTacksFromCoreData() {
         
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoredTick")
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "StoredTack")
         
         do {
             
             let objects = try context.fetch(fetchRequest)
             let docs = documentsDirectory()
-            var items: [(Tick, NSManagedObject, Date)] = []
+            var items: [(Tack, NSManagedObject, Date)] = []
             
             for obj in objects {
                 guard let urlString = obj.value(forKey: "videoURLString") as? String else { continue }
@@ -145,41 +143,41 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
                 if let url = url {
                     let date = fileDate(for: url)
-                    items.append((Tick(videoURL: url), obj, date))
+                    items.append((Tack(videoURL: url), obj, date))
                 }
             }
             
             let sorted = items.sorted { $0.2 > $1.2 }
             
-            self.ticks = sorted.map { $0.0 }
-            self.tickObjects = sorted.map { $0.1 }
+            self.tacks = sorted.map { $0.0 }
+            self.tackObjects = sorted.map { $0.1 }
             
             self.tableView.reloadData()
             
         } catch {
             
-            print("Failed to fetch ticks from Core Data: \(error)")
+            print("Failed to fetch tacks from Core Data: \(error)")
         }
     }
 
     @discardableResult
-    private func saveTickToCoreData(_ tick: Tick) -> NSManagedObject? {
+    private func saveTackToCoreData(_ tack: Tack) -> NSManagedObject? {
         
-        guard let entity = NSEntityDescription.entity(forEntityName: "StoredTick", in: context) else {
-            print("Core Data entity 'Tick' not found in model.")
+        guard let entity = NSEntityDescription.entity(forEntityName: "StoredTack", in: context) else {
+            print("Core Data entity 'Tack' not found in model.")
             return nil
         }
         
         let obj = NSManagedObject(entity: entity, insertInto: context)
         var storedString: String? = nil
         
-        if let url = tick.videoURL, let rel = relativePathForDocuments(url: url) {
+        if let url = tack.videoURL, let rel = relativePathForDocuments(url: url) {
             
             storedString = rel
             
         } else {
             
-            storedString = tick.videoURL?.absoluteString
+            storedString = tack.videoURL?.absoluteString
         }
         
         obj.setValue(storedString, forKey: "videoURLString")
@@ -192,7 +190,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         } catch {
             
-            print("Failed to save tick to Core Data: \(error)")
+            print("Failed to save tack to Core Data: \(error)")
             
             return nil
         }
@@ -205,14 +203,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
     }
 
-    private func ticksDirectory() -> URL {
+    private func tacksDirectory() -> URL {
         
-        return documentsDirectory().appendingPathComponent("Ticks", isDirectory: true)
+        return documentsDirectory().appendingPathComponent("Tacks", isDirectory: true)
     }
 
-    private func ensureTicksDirectoryExists() {
+    private func ensureTacksDirectoryExists() {
         
-        let dir = ticksDirectory()
+        let dir = tacksDirectory()
         
         if !FileManager.default.fileExists(atPath: dir.path) {
             
@@ -222,7 +220,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             } catch {
                 
-                print("Failed to create Ticks directory: \(error)")
+                print("Failed to create Tacks directory: \(error)")
             }
         }
     }
@@ -230,11 +228,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @discardableResult
     private func saveVideoToDocuments(from sourceURL: URL) throws -> URL {
         
-        ensureTicksDirectoryExists()
+        ensureTacksDirectoryExists()
         
         let ext = sourceURL.pathExtension.isEmpty ? "mov" : sourceURL.pathExtension
         let fileName = "\(UUID().uuidString).\(ext)"
-        let destinationURL = ticksDirectory().appendingPathComponent(fileName)
+        let destinationURL = tacksDirectory().appendingPathComponent(fileName)
         
         do {
             
@@ -325,17 +323,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         emptyLabel.textColor = .systemGray
         emptyLabel.font = UIFont.systemFont(ofSize: 28)
         emptyLabel.textAlignment = .center
-        emptyLabel.text = ticks.isEmpty ? "No Ticks" : nil
+        emptyLabel.text = tacks.isEmpty ? "No Tacks" : nil
         
-        tableView.backgroundView = ticks.isEmpty ? emptyLabel : nil
+        tableView.backgroundView = tacks.isEmpty ? emptyLabel : nil
         
-        return ticks.count
+        return tacks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! TableViewCell
-        cell.thumbnailImageView.image = thumbnailImageForVideo(url: ticks[indexPath.row].videoURL!)
+        cell.thumbnailImageView.image = thumbnailImageForVideo(url: tacks[indexPath.row].videoURL!)
         
         self.addShadowToViews([cell.thumbnailImageBackgroundView, cell.playButtonBackgroundView])
 
@@ -344,14 +342,14 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        playVideo(from: ticks[indexPath.row].videoURL!)
+        playVideo(from: tacks[indexPath.row].videoURL!)
     }
     
     // MARK: - Deletion
 
-    private func deleteTick(at indexPath: IndexPath) {
+    private func deleteTack(at indexPath: IndexPath) {
         // Remove video file from disk
-        if let url = ticks[indexPath.row].videoURL {
+        if let url = tacks[indexPath.row].videoURL {
             do {
                 try FileManager.default.removeItem(at: url)
             } catch {
@@ -360,19 +358,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
 
         // Remove Core Data object
-        if indexPath.row < tickObjects.count {
-            let obj = tickObjects[indexPath.row]
+        if indexPath.row < tackObjects.count {
+            let obj = tackObjects[indexPath.row]
             context.delete(obj)
             do {
                 try context.save()
             } catch {
-                print("Failed to delete tick from Core Data: \(error)")
+                print("Failed to delete tack from Core Data: \(error)")
             }
-            tickObjects.remove(at: indexPath.row)
+            tackObjects.remove(at: indexPath.row)
         }
 
         // Update data source and table view
-        ticks.remove(at: indexPath.row)
+        tacks.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .automatic)
     }
 
@@ -384,7 +382,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             guard let self = self else { completion(false); return }
-            self.deleteTick(at: indexPath)
+            self.deleteTack(at: indexPath)
             completion(true)
         }
         deleteAction.image = UIImage(systemName: "trash.fill")
@@ -405,6 +403,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    
     @IBAction func cameraButtonTouchUpInside(_ sender: UIButton) {
         
         UIView.animate(withDuration: 0.25) {
@@ -412,7 +411,40 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.cameraButtonView.transform = .identity
         }
         
-        presentVideoRecorder()
+        let status = AVCaptureDevice.authorizationStatus(for: .video)
+
+        switch status {
+            
+        case .authorized:
+
+            presentVideoRecorder()
+            
+        case .denied:
+            
+            let alertController = UIAlertController(title: "Oops!", message: "Camera permissions were denied. Please tap the settings icon and allow access to make new Tacks.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+            
+        case .notDetermined:
+            
+            requestCameraAndMicPermissions(completion: { _ in })
+            
+        case .restricted:
+            
+            let alertController = UIAlertController(title: "Oops!", message: "Camera permissions are restricted. Please tap the settings icon and allow access to create Tacks.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+            
+        @unknown default:
+            
+            let alertController = UIAlertController(title: "Oops!", message: "Camera permissions are unknown. Please send in a bug report to explain the situation.", preferredStyle: .alert)
+            let action = UIAlertAction(title: "Okay", style: .default)
+            alertController.addAction(action)
+            present(alertController, animated: true)
+            
+        }
     }
     
     @IBAction func cameraButtonTouchUpOutside(_ sender: UIButton) {
@@ -425,9 +457,92 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     @IBAction func didTapMore(_ sender: UIBarButtonItem) {
         
+        let helpEmail = "thatoneguyfromutah@gmail.com"
+
+        let alertController = UIAlertController(title: "More TickyTack Stuff", message: nil, preferredStyle: .actionSheet)
+        alertController.popoverPresentationController?.barButtonItem = sender
+        
+        let bugReportAction = UIAlertAction(title: "Send Bug Report", style: .default) { _ in
+            
+            let emailSubject = "TickyTack Bug Report"
+            let emailBody = "Please include things like the device model, operating system, and any other relevant information related to the bug(s) you have encountered below:\n\n"
+            
+            let subjectEncoded = emailSubject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let bodyEncoded = emailBody.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            
+            if let url = URL(string: "mailto:\(helpEmail)?subject=\(subjectEncoded)&body=\(bodyEncoded)"),
+                      UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email, please set one up in settings and try again, you can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(bugReportAction)
+        
+        let contactDeveloperAction = UIAlertAction(title: "Contact Developer", style: .default) { _ in
+            
+            let emailSubject = "General TickyTack Inquiry"
+            let emailBody = ""
+            
+            let subjectEncoded = emailSubject.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            let bodyEncoded = emailBody.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+            
+            if let url = URL(string: "mailto:\(helpEmail)?subject=\(subjectEncoded)&body=\(bodyEncoded)"),
+                      UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email, please set one up in settings and try again, you can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(contactDeveloperAction)
+        
+        let followDeveloperAction = UIAlertAction(title: "Dev's Personal Blog", style: .default) { _ in
+            
+            if let url = URL(string: "instagram://user?username=thatoneguyfromutah"), UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else if let url = URL(string: "https://www.instagram.com/thatoneguyfromutah"),
+                      UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the developer's personal Instagram blog.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(followDeveloperAction)
+        
+        present(alertController, animated: true)
     }
     
     @IBAction func didTapSettings(_ sender: UIBarButtonItem) {
-        
+        if let url = URL(string: UIApplication.openSettingsURLString) {
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
     }
 }
