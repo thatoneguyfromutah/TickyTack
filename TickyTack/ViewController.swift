@@ -10,8 +10,9 @@ import AVFoundation
 import UniformTypeIdentifiers
 import AVKit
 import CoreData
+import SafariServices
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, SFSafariViewControllerDelegate {
     
     // MARK: - Properties
     
@@ -88,7 +89,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         picker.sourceType = .camera
         picker.mediaTypes = ["public.movie"]
         picker.delegate = self
-        picker.videoQuality = .typeHigh // Optional
+        picker.videoQuality = .typeHigh
+        picker.videoMaximumDuration = 300 // Limit recording to 5 minutes
+        picker.allowsEditing = true
         
         present(picker, animated: true, completion: nil)
     }
@@ -558,7 +561,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
             if let url = URL(string: "https://www.iubenda.com/privacy-policy/78992277"), UIApplication.shared.canOpenURL(url) {
                 
-                UIApplication.shared.open(url)
+                let safariController = SFSafariViewController(url: url)
+                safariController.delegate = self
+                
+                self.present(safariController, animated: true)
                 
             } else {
                 
