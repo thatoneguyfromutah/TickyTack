@@ -20,9 +20,28 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="dtQ-bA-och">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="736"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="CfO-7v-UzR">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="📲 Stored On Your Device" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1Z-hV-gKc">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="44"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstItem="d1Z-hV-gKc" firstAttribute="top" secondItem="CfO-7v-UzR" secondAttribute="top" id="00F-wy-tBJ"/>
+                                        <constraint firstItem="d1Z-hV-gKc" firstAttribute="leading" secondItem="CfO-7v-UzR" secondAttribute="leading" id="8vv-YQ-YxE"/>
+                                        <constraint firstAttribute="bottom" secondItem="d1Z-hV-gKc" secondAttribute="bottom" id="Njd-qQ-WmD"/>
+                                        <constraint firstAttribute="trailing" secondItem="d1Z-hV-gKc" secondAttribute="trailing" id="WTt-BD-Kbv"/>
+                                    </constraints>
+                                </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="cell" rowHeight="373" id="Wv2-Jf-xQL" customClass="TableViewCell" customModule="TickyTack" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="373"/>
+                                        <rect key="frame" x="0.0" y="94" width="393" height="373"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Wv2-Jf-xQL" id="xbJ-Nr-jFH">
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="373"/>

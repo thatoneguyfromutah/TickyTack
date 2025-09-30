@@ -323,10 +323,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         let emptyLabel = UILabel()
-        emptyLabel.textColor = .systemGray
+        emptyLabel.textColor = .label
         emptyLabel.font = UIFont.systemFont(ofSize: 28)
         emptyLabel.textAlignment = .center
         emptyLabel.text = tacks.isEmpty ? "No Tacks" : nil
+        emptyLabel.alpha = 0.5
         
         tableView.backgroundView = tacks.isEmpty ? emptyLabel : nil
         
@@ -439,7 +440,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         case .authorized:
 
-            presentVideoRecorder()
+            if tacks.count >= 25 {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "You have too many Tacks saved to make a new one. Try deleting one or a few and try again.", preferredStyle: .alert)
+                let action = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(action)
+                present(alertController, animated: true)
+                
+            } else {
+                
+                presentVideoRecorder()
+            }
             
         case .denied:
             
@@ -454,7 +465,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             
         case .restricted:
             
-            let alertController = UIAlertController(title: "Oops!", message: "Camera permissions are restricted. Please tap the settings icon and allow access to create Tacks.", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Oops!", message: "Camera permissions are restricted. Please tap the settings icon and allow access to make Tacks.", preferredStyle: .alert)
             let action = UIAlertAction(title: "Okay", style: .default)
             alertController.addAction(action)
             present(alertController, animated: true)
@@ -499,7 +510,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             } else {
                 
-                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email, please set one up in settings and try again, you can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email. Please set one up in settings and try again. You can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
                 
                 let cancelAction = UIAlertAction(title: "Okay", style: .default)
                 alertController.addAction(cancelAction)
@@ -524,7 +535,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             } else {
                 
-                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email, please set one up in settings and try again, you can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Oops!", message: "Unable to send an email. Please set one up in settings and try again. You can also reach out through another device where email is already set up at \(helpEmail).", preferredStyle: .alert)
                 
                 let cancelAction = UIAlertAction(title: "Okay", style: .default)
                 alertController.addAction(cancelAction)
