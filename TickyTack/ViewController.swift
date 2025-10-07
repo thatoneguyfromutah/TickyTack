@@ -545,6 +545,45 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         alertController.addAction(contactDeveloperAction)
         
+        let privacyPolicyAction = UIAlertAction(title: "App Privacy Policy", style: .default) { _ in
+            
+            if let url = URL(string: "https://www.iubenda.com/privacy-policy/78992277"), UIApplication.shared.canOpenURL(url) {
+                
+                let safariController = SFSafariViewController(url: url)
+                safariController.delegate = self
+                
+                self.present(safariController, animated: true)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the app privacy policy.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(privacyPolicyAction)
+        
+        let gitRepoAction = UIAlertAction(title: "App GIT Repository", style: .default) { _ in
+            
+            if let url = URL(string: "https://github.com/thatoneguyfromutah/TickyTack"), UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the repository.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(gitRepoAction)
+        
         let followDeveloperAction = UIAlertAction(title: "Dev's Personal Blog", style: .default) { _ in
             
             if let url = URL(string: "instagram://user?username=thatoneguyfromutah"), UIApplication.shared.canOpenURL(url) {
@@ -568,27 +607,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
         alertController.addAction(followDeveloperAction)
         
-        let privacyPolicyAction = UIAlertAction(title: "App Privacy Policy", style: .default) { _ in
-            
-            if let url = URL(string: "https://www.iubenda.com/privacy-policy/78992277"), UIApplication.shared.canOpenURL(url) {
-                
-                let safariController = SFSafariViewController(url: url)
-                safariController.delegate = self
-                
-                self.present(safariController, animated: true)
-                
-            } else {
-                
-                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the app privacy policy.", preferredStyle: .alert)
-                
-                let cancelAction = UIAlertAction(title: "Okay", style: .default)
-                alertController.addAction(cancelAction)
-                
-                self.present(alertController, animated: true)
-            }
-        }
-        alertController.addAction(privacyPolicyAction)
-        
         let moreAppsAction = UIAlertAction(title: "More Apps From Dev", style: .default) { _ in
             
             if let url = URL(string: "https://apps.apple.com/developer/chase-giles/id687549414"), UIApplication.shared.canOpenURL(url) {
@@ -597,7 +615,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
             } else {
                 
-                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the developer's apps page.", preferredStyle: .alert)
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the developer's App Store page.", preferredStyle: .alert)
                 
                 let cancelAction = UIAlertAction(title: "Okay", style: .default)
                 alertController.addAction(cancelAction)
@@ -606,6 +624,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         alertController.addAction(moreAppsAction)
+        
+        let leaveReviewAction = UIAlertAction(title: "Leave An App Review", style: .default) { _ in
+            
+            if let url = URL(string: "https://apps.apple.com/app/tickytack/id6753151643"), UIApplication.shared.canOpenURL(url) {
+                
+                UIApplication.shared.open(url)
+                
+            } else {
+                
+                let alertController = UIAlertController(title: "Oops!", message: "There was an issue opening the App Store page to leave a review.", preferredStyle: .alert)
+                
+                let cancelAction = UIAlertAction(title: "Okay", style: .default)
+                alertController.addAction(cancelAction)
+                
+                self.present(alertController, animated: true)
+            }
+        }
+        alertController.addAction(leaveReviewAction)
         
         present(alertController, animated: true)
     }
